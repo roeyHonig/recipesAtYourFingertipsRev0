@@ -32,3 +32,5 @@ publish/
 .vscode/tasks.json
 .DS_Store
 Thumbs.db
+obj/Debug/net10.0/recipesAtYourFingertipsRev0.AssemblyInfo.cs
+obj/Debug/net10.0/recipesAtYourFingertipsRev0.AssemblyInfoInputs.cache
