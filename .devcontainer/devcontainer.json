@@ -1,11 +1,11 @@
 {
-  "name": "dotnet-7 MVC App",
-  "image": "mcr.microsoft.com/dotnet/sdk:7.0",
+  "name": ".NET 10 MVC App",
+  "image": "mcr.microsoft.com/dotnet/sdk:10.0",
   "remoteUser": "root",
   "features": {
     "ghcr.io/devcontainers/features/dotnet:1": {}
   },
-  "forwardPorts": [5000, 5001],
+  "forwardPorts": [5024, 7003],
   "postCreateCommand": "dotnet restore",
   "customizations": {
     "vscode": {

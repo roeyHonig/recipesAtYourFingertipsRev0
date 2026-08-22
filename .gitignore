@@ -1,0 +1,34 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio and .NET user files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Test and coverage output
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# NuGet and publish output
+*.nupkg
+*.snupkg
+.nuget/
+publish/
+
+# Local development files
+.env
+.env.*
+!.env.example
+
+# Editor and operating-system files
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+.DS_Store
+Thumbs.db
