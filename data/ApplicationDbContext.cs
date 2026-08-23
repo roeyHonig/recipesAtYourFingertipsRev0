@@ -1,9 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using recipesAtYourFingertipsRev0.Models;
+using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 
 namespace recipesAtYourFingertipsRev0.Data;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext : DbContext, IDataProtectionKeyContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
@@ -15,6 +16,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<ExternalLogin> ExternalLogins { get; set; }
 
     public DbSet<Recipe> Recipes { get; set; }
+
+    public DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
