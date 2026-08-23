@@ -8,6 +8,11 @@ public class HomeController : Controller
 {
     public IActionResult Index()
     {
+
+        ViewBag.RequestScheme = Request.Scheme;
+        ViewBag.RequestHost = Request.Host.ToString();
+        ViewBag.RequestPathBase = Request.PathBase.ToString();
+
         return View();
     }
 
