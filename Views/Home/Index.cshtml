@@ -1,8 +1,45 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<script>
+    console.log("Browser URL:", window.location.href);
+    console.log("ASP.NET Request Scheme:", "@ViewBag.RequestScheme");
+    console.log("ASP.NET Request Host:", "@ViewBag.RequestHost");
+    console.log("ASP.NET Request PathBase:", "@ViewBag.RequestPathBase");
+</script>
+
+<div class="home-page" dir="rtl">
+
+    <h1>Recipes At Your Fingertips</h1>
+
+    <p dir="ltr">Welcome to your recipe collection.</p>
+
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        <p>Authenticated!</p>
+        <p>Hello, @User.Identity.Name</p>
+
+        <form asp-controller="Account"
+            asp-action="Logout"
+            method="post">
+            <button type="submit">
+                Sign out
+            </button>
+        </form>
+    }
+    else
+    {
+        <p>Not authenticated.</p>
+
+        <a asp-controller="Account"
+        asp-action="Login"
+        asp-route-provider="Google"
+        class="google-login-button">
+            <span>G</span>
+            Sign in with Google
+        </a>
+    }
+
 </div>
+
