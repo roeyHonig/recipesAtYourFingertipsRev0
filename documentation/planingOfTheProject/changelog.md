@@ -1,6 +1,3 @@
-### Added PostgreSQL database integration with EF Core
-
-
 Implemented Google OAuth authentication using ASP.NET Core's cookie-based authentication. Added Google login and logout flows, configured development and production OAuth redirect URIs, and integrated authentication state into the Home page with conditional login/logout UI.
 
 Added environment-aware reverse-proxy handling to correctly detect the original HTTPS scheme and public host when running behind the GitHub Codespaces proxy, while retaining the groundwork for production proxy configuration.
@@ -8,7 +5,7 @@ Added environment-aware reverse-proxy handling to correctly detect the original 
 
 
 
-
+### Added PostgreSQL database integration with EF Core
 - Added Entity Framework Core with PostgreSQL (Npgsql) support.
 - Added `ApplicationDbContext` and configured it for PostgreSQL.
 - Added initial domain entities:
