@@ -1,4 +1,6 @@
-﻿@{
+﻿@model recipesAtYourFingertipsRev0.Models.User?
+
+@{
     ViewData["Title"] = "Home";
 }
 
@@ -15,14 +17,15 @@
 
     <p dir="ltr">Welcome to your recipe collection.</p>
 
-    @if (User.Identity?.IsAuthenticated == true)
+    @if (Model != null)
     {
         <p>Authenticated!</p>
-        <p>Hello, @User.Identity.Name</p>
+        <p>Hello, @Model.DisplayName</p>
+        <p>Application User ID: @Model.Id</p>
 
         <form asp-controller="Account"
-            asp-action="Logout"
-            method="post">
+              asp-action="Logout"
+              method="post">
             <button type="submit">
                 Sign out
             </button>
@@ -33,13 +36,12 @@
         <p>Not authenticated.</p>
 
         <a asp-controller="Account"
-        asp-action="Login"
-        asp-route-provider="Google"
-        class="google-login-button">
+           asp-action="Login"
+           asp-route-provider="Google"
+           class="google-login-button">
             <span>G</span>
             Sign in with Google
         </a>
     }
 
 </div>
-

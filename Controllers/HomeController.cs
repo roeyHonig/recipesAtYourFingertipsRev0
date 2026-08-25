@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using recipesAtYourFingertipsRev0.Models;
+using recipesAtYourFingertipsRev0.Services;
 
 namespace recipesAtYourFingertipsRev0.Controllers;
 
@@ -13,7 +14,9 @@ public class HomeController : Controller
         ViewBag.RequestHost = Request.Host.ToString();
         ViewBag.RequestPathBase = Request.PathBase.ToString();
 
-        return View();
+        var user = CurrentUserService.GetCurrentUserFromRequest(HttpContext);
+
+        return View(user);
     }
 
     public IActionResult Privacy()
