@@ -1,3 +1,23 @@
+feat: recipes
+Google login/logout working.
+Google is no longer the default challenge scheme.
+Internal User + ExternalLogin registration.
+Request-scoped current user.
+[Authorize] protecting Recipes.
+Per-user recipe querying.
+Recipe creation with server-controlled OwnerId and timestamps.
+RTL cosmetics for the recipe UI.
+
+
+
+
+
+
+
+
+
+
+
 feat: application user integration
 - Add CurrentUserService to find or create application users
 - Add CurrentUserMiddleware to synchronize authenticated identities

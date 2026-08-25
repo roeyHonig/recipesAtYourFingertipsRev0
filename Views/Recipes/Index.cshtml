@@ -1,0 +1,31 @@
+@model IEnumerable<recipesAtYourFingertipsRev0.Models.Recipe>
+
+@{
+    ViewData["Title"] = "My Recipes";
+}
+
+<div class="recipes-page">
+
+    <h1>My Recipes</h1>
+
+    <a asp-action="Create" class="btn btn-primary">
+        + Add Recipe
+    </a>
+
+    <p>Hello, @ViewBag.AppUser.DisplayName!</p>
+
+    @if (!Model.Any())
+    {
+        <p>You haven't added any recipes yet.</p>
+    }
+    else
+    {
+        <ul dir="rtl" style="text-align: right;">
+            @foreach (var recipe in Model)
+            {
+                <li>@recipe.Title</li>
+            }
+        </ul>
+    }
+
+</div>
