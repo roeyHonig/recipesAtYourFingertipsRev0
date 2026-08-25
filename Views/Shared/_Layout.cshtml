@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="~/recipesAtYourFingertipsRev0.styles.css" asp-append-version="true" />
 </head>
 <body>
-    @if (User.Identity?.IsAuthenticated == true)
+    @if (User.Identity?.IsAuthenticated == true &&
+     ViewData["HideNavbar"] as bool? != true)
 {
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">

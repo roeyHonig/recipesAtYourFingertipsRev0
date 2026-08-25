@@ -1,0 +1,24 @@
+@model recipesAtYourFingertipsRev0.Models.Recipe
+
+@{
+    ViewData["Title"] = Model.Title;
+    ViewData["HideNavbar"] = true;
+}
+
+<div dir="rtl" style="text-align: right;">
+
+    <h1>@Model.Title</h1>
+
+    <h3>חומרים</h3>
+
+    <div class="recipe-text">
+        @Model.Ingredients
+    </div>
+
+    <h3>הוראות</h3>
+
+    <div class="recipe-text">
+        @Model.Instructions
+    </div>
+
+</div>
