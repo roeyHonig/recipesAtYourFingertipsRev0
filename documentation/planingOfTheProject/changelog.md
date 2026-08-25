@@ -1,3 +1,23 @@
+feat: navbar
+Refine authentication-based navigation and home page flow
+
+- Redirect authenticated users from Home (/) to My Recipes
+- Keep the Home page as the landing/sign-in page for unauthenticated users
+- Hide the application navbar from unauthenticated users
+- Add Recipes, Add a Recipe, Privacy, and Sign out actions to the authenticated navbar
+- Keep logout as a POST action through AccountController
+- Simplify the Home view by removing authenticated-user UI
+- Preserve the existing Google sign-in flow
+- Ensure Google is no longer the default authentication challenge scheme
+
+
+
+
+
+
+
+
+
 feat: recipes
 Google login/logout working.
 Google is no longer the default challenge scheme.
