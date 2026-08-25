@@ -1,3 +1,57 @@
+Add Microsoft OAuth authentication support
+
+- Add Microsoft account OAuth provider alongside Google authentication
+- Support personal and Entra Microsoft accounts
+- Add Microsoft authentication configuration and secrets handling
+- Add Microsoft login option to the authentication flow
+- Make external provider detection dynamic instead of Google-only
+- Store correct provider information in ExternalLogin records
+- Preserve existing internal User identity model across providers
+- Verify Google and Microsoft users are created and resolved correctly
+
+
+
+
+
+
+
+Add public recipe details pages
+
+- Make recipes in My Recipes clickable
+- Open recipe details in a new browser tab
+- Add public /Recipes/Details/{id} endpoint
+- Allow anonymous access to individual recipe details
+- Add read-only recipe details view
+- Preserve line breaks in ingredients and instructions
+- Add RTL layout and Hebrew labels to recipe details
+- Hide the authenticated navbar on public recipe details pages
+- Keep recipe ownership enforced for the private My Recipes list
+
+
+
+
+
+
+feat: navbar
+Refine authentication-based navigation and home page flow
+
+- Redirect authenticated users from Home (/) to My Recipes
+- Keep the Home page as the landing/sign-in page for unauthenticated users
+- Hide the application navbar from unauthenticated users
+- Add Recipes, Add a Recipe, Privacy, and Sign out actions to the authenticated navbar
+- Keep logout as a POST action through AccountController
+- Simplify the Home view by removing authenticated-user UI
+- Preserve the existing Google sign-in flow
+- Ensure Google is no longer the default authentication challenge scheme
+
+
+
+
+
+
+
+
+
 feat: recipes
 Google login/logout working.
 Google is no longer the default challenge scheme.

@@ -35,8 +35,14 @@ public class CurrentUserService
                 "Authenticated user does not have a provider user ID.");
         }
 
-        // Google is currently our only external provider.
-        const string provider = "Google";
+        var provider =
+            principal.FindFirstValue("ExternalProvider");
+
+        if (string.IsNullOrWhiteSpace(provider))
+        {
+            throw new InvalidOperationException(
+                "Authenticated user does not have an external provider.");
+        }
 
         var externalLogin = await _db.ExternalLogins
             .SingleOrDefaultAsync(x =>

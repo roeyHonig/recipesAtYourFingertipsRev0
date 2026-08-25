@@ -9,6 +9,10 @@ public class HomeController : Controller
 {
     public IActionResult Index()
     {
+        if (User.Identity?.IsAuthenticated == true)
+        {
+            return RedirectToAction("Index", "Recipes");
+        }
 
         ViewBag.RequestScheme = Request.Scheme;
         ViewBag.RequestHost = Request.Host.ToString();
