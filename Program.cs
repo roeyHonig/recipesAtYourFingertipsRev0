@@ -64,9 +64,12 @@ builder.Services
             CookieAuthenticationDefaults.AuthenticationScheme;
 
         options.DefaultChallengeScheme =
-            GoogleDefaults.AuthenticationScheme;
+            CookieAuthenticationDefaults.AuthenticationScheme;
     })
-    .AddCookie()
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Home";
+    })
     .AddGoogle(options =>
     {
         options.ClientId = googleClientId;
