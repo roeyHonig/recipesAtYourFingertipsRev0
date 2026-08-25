@@ -5,6 +5,8 @@ using recipesAtYourFingertipsRev0.Data;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 using Microsoft.AspNetCore.DataProtection;
+using recipesAtYourFingertipsRev0.Services;
+using recipesAtYourFingertipsRev0.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 // TODO roey: try to remove (or condition to development build) registering the ForwardedHeadersOptions, to see if it is not needed in production.
@@ -21,6 +23,8 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<CurrentUserService>();
 
 var connectionString =
     builder.Configuration.GetConnectionString("DefaultConnection");
@@ -85,6 +89,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthentication();
+app.UseCurrentUser();
 app.UseAuthorization();
 
 app.MapStaticAssets();
