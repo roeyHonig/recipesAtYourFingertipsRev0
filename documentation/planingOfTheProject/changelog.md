@@ -1,3 +1,20 @@
+Add Microsoft OAuth authentication support
+
+- Add Microsoft account OAuth provider alongside Google authentication
+- Support personal and Entra Microsoft accounts
+- Add Microsoft authentication configuration and secrets handling
+- Add Microsoft login option to the authentication flow
+- Make external provider detection dynamic instead of Google-only
+- Store correct provider information in ExternalLogin records
+- Preserve existing internal User identity model across providers
+- Verify Google and Microsoft users are created and resolved correctly
+
+
+
+
+
+
+
 Add public recipe details pages
 
 - Make recipes in My Recipes clickable

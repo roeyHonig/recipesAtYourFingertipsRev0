@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 using Microsoft.AspNetCore.DataProtection;
 using recipesAtYourFingertipsRev0.Services;
 using recipesAtYourFingertipsRev0.Middleware;
+using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 // TODO roey: try to remove (or condition to development build) registering the ForwardedHeadersOptions, to see if it is not needed in production.
@@ -54,6 +56,18 @@ if (string.IsNullOrWhiteSpace(googleClientId) ||
     throw new InvalidOperationException(
         "Google authentication credentials are missing.");
 }
+var microsoftClientId =
+    builder.Configuration["Authentication:Microsoft:ClientId"];
+
+var microsoftClientSecret =
+    builder.Configuration["Authentication:Microsoft:ClientSecret"];
+
+if (string.IsNullOrWhiteSpace(microsoftClientId) ||
+    string.IsNullOrWhiteSpace(microsoftClientSecret))
+{
+    throw new InvalidOperationException(
+        "Microsoft authentication credentials are missing.");
+}
 builder.Services
     .AddAuthentication(options =>
     {
@@ -74,6 +88,27 @@ builder.Services
     {
         options.ClientId = googleClientId;
         options.ClientSecret = googleClientSecret;
+
+        options.Events.OnCreatingTicket = context =>
+        {
+            context.Identity!.AddClaim(
+                new Claim("ExternalProvider", "Google"));
+
+            return Task.CompletedTask;
+        };
+    })
+    .AddMicrosoftAccount(options =>
+    {
+        options.ClientId = microsoftClientId;
+        options.ClientSecret = microsoftClientSecret;
+
+        options.Events.OnCreatingTicket = context =>
+        {
+            context.Identity!.AddClaim(
+                new Claim("ExternalProvider", "Microsoft"));
+
+            return Task.CompletedTask;
+        };
     });
 
 
