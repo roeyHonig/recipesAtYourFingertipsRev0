@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 using Microsoft.AspNetCore.DataProtection;
 
 var builder = WebApplication.CreateBuilder(args);
-
+// TODO roey: try to remove (or condition to development build) registering the ForwardedHeadersOptions, to see if it is not needed in production.
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
     options.ForwardedHeaders =
@@ -71,7 +71,7 @@ builder.Services
 
 
 var app = builder.Build();
-
+// TODO roey: try to remove (or condition to development build) the ForwardedHeaders Middleware, to see if it is not needed in production.
 app.UseForwardedHeaders();
 
 // Configure the HTTP request pipeline.
