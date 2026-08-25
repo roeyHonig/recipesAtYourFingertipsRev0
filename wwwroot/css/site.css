@@ -69,3 +69,7 @@ body {
     font-weight: bold;
     font-size: 18px;
 }
+
+.recipe-text {
+    white-space: pre-line;
+}

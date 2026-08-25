@@ -1,3 +1,20 @@
+Add public recipe details pages
+
+- Make recipes in My Recipes clickable
+- Open recipe details in a new browser tab
+- Add public /Recipes/Details/{id} endpoint
+- Allow anonymous access to individual recipe details
+- Add read-only recipe details view
+- Preserve line breaks in ingredients and instructions
+- Add RTL layout and Hebrew labels to recipe details
+- Hide the authenticated navbar on public recipe details pages
+- Keep recipe ownership enforced for the private My Recipes list
+
+
+
+
+
+
 feat: navbar
 Refine authentication-based navigation and home page flow
 

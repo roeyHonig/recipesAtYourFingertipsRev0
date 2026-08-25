@@ -77,4 +77,18 @@ public class RecipesController : Controller
 
         return RedirectToAction(nameof(Index));
     }
+
+    [AllowAnonymous]
+    public async Task<IActionResult> Details(int id)
+    {
+        var recipe = await _db.Recipes
+            .FirstOrDefaultAsync(recipe => recipe.Id == id);
+
+        if (recipe == null)
+        {
+            return NotFound();
+        }
+
+        return View(recipe);
+    }
 }

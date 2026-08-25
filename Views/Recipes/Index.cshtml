@@ -20,12 +20,18 @@
     }
     else
     {
-        <ul dir="rtl" style="text-align: right;">
+        <ul style="text-align: right;" dir="rtl">
             @foreach (var recipe in Model)
             {
-                <li>@recipe.Title</li>
+                <li>
+                    <a asp-action="Details"
+                    asp-route-id="@recipe.Id"
+                    target="_blank">
+                        @recipe.Title
+                    </a>
+                </li>
             }
-        </ul>
+</ul>
     }
 
 </div>
