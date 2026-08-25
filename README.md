@@ -10,6 +10,10 @@ dotnet user-secrets set "Authentication:Google:ClientId" "YOUR_CLIENT_ID"
 
 dotnet user-secrets set "Authentication:Google:ClientSecret" "YOUR_CLIENT_SECRET"
 
+dotnet user-secrets set "Authentication:Microsoft:ClientId" "YOUR_CLIENT_ID"
+
+dotnet user-secrets set "Authentication:Microsoft:ClientSecret" "YOUR_CLIENT_SECRET_value"
+
 you can print to terminal all the current secrets to verify by running
 dotnet user-secrets list
 
@@ -18,3 +22,4 @@ this app uses the following service providers:
 digitalOcean - a platform to deploy our app to a public domain. login via github, payment method was set to be apple pay.
 Neon - provides our postgerSQL DB - login via github
 Google cloud console - for auth0 - login via your google account, credit card was set as the payment method
+Microsoft entra admin center - for auth0 - login via the microsoft personal account and also azure account using email: spill.48thane@icloud.com. credit card was set as a payment method.

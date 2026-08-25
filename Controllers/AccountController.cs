@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
 
 namespace recipesAtYourFingertipsRev0.Controllers;
 
@@ -9,7 +10,8 @@ public class AccountController : Controller
 {
     public IActionResult Login(string provider)
     {
-        if (provider != GoogleDefaults.AuthenticationScheme)
+        if (provider != GoogleDefaults.AuthenticationScheme &&
+    provider != MicrosoftAccountDefaults.AuthenticationScheme)
         {
             return BadRequest("Unsupported authentication provider.");
         }
@@ -23,9 +25,7 @@ public class AccountController : Controller
             RedirectUri = "/"
         };
 
-        return Challenge(
-            properties,
-            GoogleDefaults.AuthenticationScheme);
+        return Challenge(properties,provider);
     }
 
     [HttpPost]
