@@ -1,3 +1,23 @@
+Add recipe editing functionality and improve recipe list UI
+
+* Add styled recipe buttons to the My Recipes page
+* Add edit pencil button for each recipe
+* Add authenticated GET and POST Edit actions
+* Pre-populate the edit form with existing recipe details
+* Update recipe title, ingredients, instructions, and UpdatedAt timestamp
+* Preserve the original CreatedAt timestamp when editing
+* Enforce recipe ownership on both loading and saving
+* Return 404 when attempting to edit another user's recipe
+* Add RTL styling to recipe content while keeping the page header LTR
+* Style Microsoft sign-in button to match the Google sign-in experience
+* Update Microsoft sign-in text to "Continue with Microsoft"
+* Add a simple Windows-style Microsoft icon
+
+
+
+
+
+
 Add Microsoft OAuth authentication support
 
 - Add Microsoft account OAuth provider alongside Google authentication

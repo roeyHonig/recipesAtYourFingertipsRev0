@@ -4,15 +4,17 @@
     ViewData["Title"] = "My Recipes";
 }
 
-<div class="recipes-page">
+<div class="recipes-page" dir="rtl">
 
-    <h1>My Recipes</h1>
+    <div class="recipes-header" dir="ltr">
+        <h1>My Recipes</h1>
 
-    <a asp-action="Create" class="btn btn-primary">
-        + Add Recipe
-    </a>
+        <a asp-action="Create" class="btn btn-primary">
+            + Add Recipe
+        </a>
 
-    <p>Hello, @ViewBag.AppUser.DisplayName!</p>
+        <p>Hello, @ViewBag.AppUser.DisplayName!</p>
+    </div>
 
     @if (!Model.Any())
     {
@@ -20,18 +22,31 @@
     }
     else
     {
-        <ul style="text-align: right;" dir="rtl">
+        <div class="recipe-list">
+
             @foreach (var recipe in Model)
             {
-                <li>
+                <div class="recipe-list-item">
+
                     <a asp-action="Details"
-                    asp-route-id="@recipe.Id"
-                    target="_blank">
+                       asp-route-id="@recipe.Id"
+                       target="_blank"
+                       class="recipe-button">
                         @recipe.Title
                     </a>
-                </li>
+
+                    <a asp-action="Edit"
+                       asp-route-id="@recipe.Id"
+                       class="recipe-edit-button"
+                       title="Edit recipe"
+                       aria-label="Edit recipe">
+                        ✎
+                    </a>
+
+                </div>
             }
-</ul>
+
+        </div>
     }
 
 </div>
