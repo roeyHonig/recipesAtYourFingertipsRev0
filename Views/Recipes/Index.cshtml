@@ -1,4 +1,4 @@
-@model IEnumerable<recipesAtYourFingertipsRev0.Models.Recipe>
+@model recipesAtYourFingertipsRev0.Models.PaginatedRecipesViewModel
 
 @{
     ViewData["Title"] = "My Recipes";
@@ -14,17 +14,44 @@
         </a>
 
         <p>Hello, @ViewBag.AppUser.DisplayName!</p>
+
+        <div class="recipes-page-size">
+            <label for="pageSize">Recipes per page:</label>
+
+            <select id="pageSize"
+                    onchange="window.location.href = '/Recipes?page=1&pageSize=' + this.value;">
+
+                @foreach (var size in new[] { 10, 20, 30, 40, 50 })
+                {
+                    if (Model.PageSize == size)
+                    {
+                        <option value="@size" selected>@size</option>
+                    }
+                    else
+                    {
+                        <option value="@size">@size</option>
+                    }
+                }
+
+            </select>
+        </div>
     </div>
 
-    @if (!Model.Any())
+    @if (Model.TotalRecipes == 0)
     {
         <p>You haven't added any recipes yet.</p>
     }
     else
     {
+        <div class="recipes-pagination-info" dir="ltr">
+            Showing @Model.FirstItem–@Model.LastItem out of @Model.TotalRecipes recipes
+        </div>
+
+        <partial name="_Pagination" />
+
         <div class="recipe-list">
 
-            @foreach (var recipe in Model)
+            @foreach (var recipe in Model.Recipes)
             {
                 <div class="recipe-list-item">
 
@@ -47,6 +74,8 @@
             }
 
         </div>
+
+        <partial name="_Pagination" />
     }
 
 </div>

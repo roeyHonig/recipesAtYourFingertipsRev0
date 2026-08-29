@@ -1,3 +1,18 @@
+feat: add configurable recipe pagination
+
+- Add pagination with configurable page size
+- Support 10, 20, 30, 40 and 50 recipes per page
+- Add smart page navigation with ellipses
+- Preserve page size across pagination links
+- Add pagination controls above and below recipe results
+
+
+
+
+
+
+
+
 Add recipe editing functionality and improve recipe list UI
 
 * Add styled recipe buttons to the My Recipes page
