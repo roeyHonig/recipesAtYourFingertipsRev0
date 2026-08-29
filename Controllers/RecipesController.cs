@@ -17,7 +17,7 @@ public class RecipesController : Controller
         _db = db;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int page = 1)
     {
         var appUser =
             CurrentUserService.GetCurrentUserFromRequest(HttpContext);
@@ -27,13 +27,42 @@ public class RecipesController : Controller
             return Challenge();
         }
 
+        const int pageSize = 20;
+
+        var totalRecipes = await _db.Recipes
+            .CountAsync(recipe => recipe.OwnerId == appUser.Id);
+
+        var totalPages =
+            (int)Math.Ceiling((double)totalRecipes / pageSize);
+
+        if (totalPages > 0 && page > totalPages)
+        {
+            page = totalPages;
+        }
+
+        if (page < 1)
+        {
+            page = 1;
+        }
+
         var recipes = await _db.Recipes
             .Where(recipe => recipe.OwnerId == appUser.Id)
+            .OrderBy(recipe => recipe.Id)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
             .ToListAsync();
+
+        var viewModel = new PaginatedRecipesViewModel
+        {
+            Recipes = recipes,
+            CurrentPage = page,
+            PageSize = pageSize,
+            TotalRecipes = totalRecipes
+        };
 
         ViewBag.AppUser = appUser;
 
-        return View(recipes);
+        return View(viewModel);
     }
 
     [HttpGet]
