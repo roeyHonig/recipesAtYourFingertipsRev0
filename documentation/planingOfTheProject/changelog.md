@@ -1,3 +1,55 @@
+feat: add secure recipe deletion
+
+- Add authenticated POST delete action
+- Restrict deletion to recipe owners
+- Add anti-forgery protection
+- Add delete button to recipe list
+- Add user confirmation before deletion
+
+
+
+
+
+
+
+
+
+
+feat: add configurable recipe pagination
+
+- Add pagination with configurable page size
+- Support 10, 20, 30, 40 and 50 recipes per page
+- Add smart page navigation with ellipses
+- Preserve page size across pagination links
+- Add pagination controls above and below recipe results
+
+
+
+
+
+
+
+
+Add recipe editing functionality and improve recipe list UI
+
+* Add styled recipe buttons to the My Recipes page
+* Add edit pencil button for each recipe
+* Add authenticated GET and POST Edit actions
+* Pre-populate the edit form with existing recipe details
+* Update recipe title, ingredients, instructions, and UpdatedAt timestamp
+* Preserve the original CreatedAt timestamp when editing
+* Enforce recipe ownership on both loading and saving
+* Return 404 when attempting to edit another user's recipe
+* Add RTL styling to recipe content while keeping the page header LTR
+* Style Microsoft sign-in button to match the Google sign-in experience
+* Update Microsoft sign-in text to "Continue with Microsoft"
+* Add a simple Windows-style Microsoft icon
+
+
+
+
+
+
 Add Microsoft OAuth authentication support
 
 - Add Microsoft account OAuth provider alongside Google authentication
