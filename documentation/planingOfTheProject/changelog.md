@@ -1,3 +1,20 @@
+feat: add secure recipe deletion
+
+- Add authenticated POST delete action
+- Restrict deletion to recipe owners
+- Add anti-forgery protection
+- Add delete button to recipe list
+- Add user confirmation before deletion
+
+
+
+
+
+
+
+
+
+
 feat: add configurable recipe pagination
 
 - Add pagination with configurable page size
