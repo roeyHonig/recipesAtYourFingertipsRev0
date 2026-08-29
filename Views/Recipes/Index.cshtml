@@ -70,6 +70,20 @@
                         ✎
                     </a>
 
+                    <form asp-action="Delete"
+                        asp-route-id="@recipe.Id"
+                        method="post"
+                        onsubmit="return confirm('Are you sure you want to delete &quot;@recipe.Title&quot;?');">
+
+                        <button type="submit"
+                                class="recipe-delete-button"
+                                title="Delete recipe"
+                                aria-label="Delete recipe">
+                            🗑
+                        </button>
+
+                    </form>
+
                 </div>
             }
 

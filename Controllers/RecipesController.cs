@@ -189,4 +189,33 @@ public class RecipesController : Controller
 
         return RedirectToAction(nameof(Index));
     }
+
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Delete(int id)
+    {
+        var appUser =
+            CurrentUserService.GetCurrentUserFromRequest(HttpContext);
+
+        if (appUser == null)
+        {
+            return Challenge();
+        }
+
+        var recipe = await _db.Recipes
+            .SingleOrDefaultAsync(r =>
+                r.Id == id &&
+                r.OwnerId == appUser.Id);
+
+        if (recipe == null)
+        {
+            return NotFound();
+        }
+
+        _db.Recipes.Remove(recipe);
+
+        await _db.SaveChangesAsync();
+
+        return RedirectToAction(nameof(Index));
+    }
 }
