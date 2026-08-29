@@ -27,7 +27,7 @@ public class RecipesController : Controller
             return Challenge();
         }
 
-        const int pageSize = 20;
+        const int pageSize = 10;
 
         var totalRecipes = await _db.Recipes
             .CountAsync(recipe => recipe.OwnerId == appUser.Id);
