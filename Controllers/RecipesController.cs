@@ -17,7 +17,7 @@ public class RecipesController : Controller
         _db = db;
     }
 
-    public async Task<IActionResult> Index(int page = 1)
+    public async Task<IActionResult> Index(int page = 1, int pageSize = 20)
     {
         var appUser =
             CurrentUserService.GetCurrentUserFromRequest(HttpContext);
@@ -27,22 +27,31 @@ public class RecipesController : Controller
             return Challenge();
         }
 
-        const int pageSize = 10;
+        var allowedPageSizes = new[] { 10, 20, 30, 40, 50 };
 
-        var totalRecipes = await _db.Recipes
-            .CountAsync(recipe => recipe.OwnerId == appUser.Id);
-
-        var totalPages =
-            (int)Math.Ceiling((double)totalRecipes / pageSize);
-
-        if (totalPages > 0 && page > totalPages)
+        if (!allowedPageSizes.Contains(pageSize))
         {
-            page = totalPages;
+            pageSize = 20;
         }
 
-        if (page < 1)
+        var totalRecipes = await _db.Recipes
+            .Where(recipe => recipe.OwnerId == appUser.Id)
+            .CountAsync();
+
+        var totalPages = (int)Math.Ceiling(
+            totalRecipes / (double)pageSize);
+
+        if (totalPages == 0)
         {
             page = 1;
+        }
+        else if (page < 1)
+        {
+            page = 1;
+        }
+        else if (page > totalPages)
+        {
+            page = totalPages;
         }
 
         var recipes = await _db.Recipes
@@ -53,13 +62,12 @@ public class RecipesController : Controller
             .ToListAsync();
 
         var viewModel = new PaginatedRecipesViewModel
-        {
-            Recipes = recipes,
-            CurrentPage = page,
-            PageSize = pageSize,
-            TotalRecipes = totalRecipes
-        };
-
+            {
+                Recipes = recipes,
+                CurrentPage = page,
+                PageSize = pageSize,
+                TotalRecipes = totalRecipes
+            };
         ViewBag.AppUser = appUser;
 
         return View(viewModel);

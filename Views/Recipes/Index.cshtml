@@ -14,6 +14,27 @@
         </a>
 
         <p>Hello, @ViewBag.AppUser.DisplayName!</p>
+
+        <div class="recipes-page-size">
+            <label for="pageSize">Recipes per page:</label>
+
+            <select id="pageSize"
+                    onchange="window.location.href = '/Recipes?page=1&pageSize=' + this.value;">
+
+                @foreach (var size in new[] { 10, 20, 30, 40, 50 })
+                {
+                    if (Model.PageSize == size)
+                    {
+                        <option value="@size" selected>@size</option>
+                    }
+                    else
+                    {
+                        <option value="@size">@size</option>
+                    }
+                }
+
+            </select>
+        </div>
     </div>
 
     @if (Model.TotalRecipes == 0)

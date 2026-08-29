@@ -8,6 +8,7 @@
         {
             <a asp-action="Index"
                asp-route-page="@(Model.CurrentPage - 1)"
+               asp-route-pageSize="@Model.PageSize"
                class="pagination-button">
                 &lt; Previous
             </a>
@@ -43,6 +44,7 @@
 
             <a asp-action="Index"
                asp-route-page="@pageNumber"
+               asp-route-pageSize="@Model.PageSize"
                class="pagination-button @(pageNumber == currentPage ? "active" : "")">
                 @pageNumber
             </a>
@@ -52,6 +54,7 @@
         {
             <a asp-action="Index"
                asp-route-page="@(Model.CurrentPage + 1)"
+               asp-route-pageSize="@Model.PageSize"
                class="pagination-button">
                 Next &gt;
             </a>
