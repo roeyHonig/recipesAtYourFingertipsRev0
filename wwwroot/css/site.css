@@ -258,3 +258,9 @@ body {
     color: white;
     font-weight: bold;
 }
+
+.pagination-ellipsis {
+    display: inline-block;
+    padding: 7px 4px;
+    color: #666;
+}
