@@ -1,95 +1,95 @@
 @model recipesAtYourFingertipsRev0.Models.PaginatedRecipesViewModel
 
 @{
-    ViewData["Title"] = "My Recipes";
+ViewData["Title"] = "My Recipes";
 }
 
 <div class="recipes-page" dir="rtl">
 
-    <div class="recipes-header" dir="ltr">
-        <h1>My Recipes</h1>
+<div class="recipes-header" dir="ltr">
+    <h1>My Recipes</h1>
 
-        <a asp-action="Create" class="btn btn-primary">
-            + Add Recipe
-        </a>
+    <a asp-action="Create" class="btn btn-primary">
+        + Add Recipe
+    </a>
 
-        <p>Hello, @ViewBag.AppUser.DisplayName!</p>
+    <p>Hello, @ViewBag.AppUser.DisplayName!</p>
 
-        <div class="recipes-page-size">
-            <label for="pageSize">Recipes per page:</label>
+    <div class="recipes-page-size">
+        <label for="pageSize">Recipes per page:</label>
 
-            <select id="pageSize"
-                    onchange="window.location.href = '/Recipes?page=1&pageSize=' + this.value;">
+        <select id="pageSize"
+                onchange="window.location.href = '@Url.Action("Index", "Recipes")?page=1&pageSize=' + this.value + '&searchTerm=@Uri.EscapeDataString(Model.SearchTerm)';">
 
-                @foreach (var size in new[] { 10, 20, 30, 40, 50 })
-                {
-                    if (Model.PageSize == size)
-                    {
-                        <option value="@size" selected>@size</option>
-                    }
-                    else
-                    {
-                        <option value="@size">@size</option>
-                    }
-                }
-
-            </select>
-        </div>
-    </div>
-
-    @if (Model.TotalRecipes == 0)
-    {
-        <p>You haven't added any recipes yet.</p>
-    }
-    else
-    {
-        <div class="recipes-pagination-info" dir="ltr">
-            Showing @Model.FirstItem–@Model.LastItem out of @Model.TotalRecipes recipes
-        </div>
-
-        <partial name="_Pagination" />
-
-        <div class="recipe-list">
-
-            @foreach (var recipe in Model.Recipes)
+            @foreach (var size in new[] { 10, 20, 30, 40, 50 })
             {
-                <div class="recipe-list-item">
-
-                    <a asp-action="Details"
-                       asp-route-id="@recipe.Id"
-                       target="_blank"
-                       class="recipe-button">
-                        @recipe.Title
-                    </a>
-
-                    <a asp-action="Edit"
-                       asp-route-id="@recipe.Id"
-                       class="recipe-edit-button"
-                       title="Edit recipe"
-                       aria-label="Edit recipe">
-                        ✎
-                    </a>
-
-                    <form asp-action="Delete"
-                        asp-route-id="@recipe.Id"
-                        method="post"
-                        onsubmit="return confirm('Are you sure you want to delete &quot;@recipe.Title&quot;?');">
-
-                        <button type="submit"
-                                class="recipe-delete-button"
-                                title="Delete recipe"
-                                aria-label="Delete recipe">
-                            🗑
-                        </button>
-
-                    </form>
-
-                </div>
+                if (Model.PageSize == size)
+                {
+                    <option value="@size" selected>@size</option>
+                }
+                else
+                {
+                    <option value="@size">@size</option>
+                }
             }
 
-        </div>
+        </select>
+    </div>
+</div>
 
-        <partial name="_Pagination" />
-    }
+@if (Model.TotalRecipes == 0)
+{
+    <p>You haven't added any recipes yet.</p>
+}
+else
+{
+    <div class="recipes-pagination-info" dir="ltr">
+        Showing @Model.FirstItem–@Model.LastItem out of @Model.TotalRecipes recipes
+    </div>
+
+    <partial name="_Pagination" />
+
+    <div class="recipe-list">
+
+        @foreach (var recipe in Model.Recipes)
+        {
+            <div class="recipe-list-item">
+
+                <a asp-action="Details"
+                   asp-route-id="@recipe.Id"
+                   target="_blank"
+                   class="recipe-button">
+                    @recipe.Title
+                </a>
+
+                <a asp-action="Edit"
+                   asp-route-id="@recipe.Id"
+                   class="recipe-edit-button"
+                   title="Edit recipe"
+                   aria-label="Edit recipe">
+                    ✎
+                </a>
+
+                <form asp-action="Delete"
+                      asp-route-id="@recipe.Id"
+                      method="post"
+                      onsubmit="return confirm('Are you sure you want to delete &quot;@recipe.Title&quot;?');">
+
+                    <button type="submit"
+                            class="recipe-delete-button"
+                            title="Delete recipe"
+                            aria-label="Delete recipe">
+                        🗑
+                    </button>
+
+                </form>
+
+            </div>
+        }
+
+    </div>
+
+    <partial name="_Pagination" />
+}
 
 </div>
