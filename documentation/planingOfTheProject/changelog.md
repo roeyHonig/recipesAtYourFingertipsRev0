@@ -1,4 +1,13 @@
-Use forward headers only in development so Auth0 providers don't consider the original request coming from the github codespace forward url
+fix: handle HTTPS correctly behind DigitalOcean reverse proxy
+
+* Use forwarded headers only in the development environment
+* Keep development forwarded-header configuration for GitHub Codespaces
+* Remove forwarded-header processing from production
+* Force the request scheme to HTTPS in production, since DigitalOcean terminates TLS at the reverse proxy
+* Ensure Google and Microsoft OAuth generate HTTPS redirect URIs in production
+* Avoid trusting arbitrary forwarded headers in the production environment
+* Keep production networking configuration simple and explicit
+
 ---------------------------------------
 ---------------------------------------
 Improve recipe details page UI and responsive presentation

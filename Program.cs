@@ -11,17 +11,20 @@ using Microsoft.AspNetCore.Authentication.MicrosoftAccount;
 using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
-// TODO roey: try to remove (or condition to development build) registering the ForwardedHeadersOptions, to see if it is not needed in production.
-/*builder.Services.Configure<ForwardedHeadersOptions>(options =>
+if (builder.Environment.IsDevelopment())
 {
-    options.ForwardedHeaders =
-        ForwardedHeaders.XForwardedFor |
-        ForwardedHeaders.XForwardedProto |
-        ForwardedHeaders.XForwardedHost;
+    builder.Services.Configure<ForwardedHeadersOptions>(options =>
+    {
+        options.ForwardedHeaders =
+            ForwardedHeaders.XForwardedFor |
+            ForwardedHeaders.XForwardedProto |
+            ForwardedHeaders.XForwardedHost;
 
-    options.KnownNetworks.Clear();
-    options.KnownProxies.Clear();
-});*/
+        options.KnownNetworks.Clear();
+        options.KnownProxies.Clear();
+    });
+}
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -115,8 +118,10 @@ builder.Services
 var app = builder.Build();
 
 
-
-//app.UseForwardedHeaders();
+if (app.Environment.IsDevelopment())
+{
+    app.UseForwardedHeaders();
+}
 
 
 // Configure the HTTP request pipeline.
