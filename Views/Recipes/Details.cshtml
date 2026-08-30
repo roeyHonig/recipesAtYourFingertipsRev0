@@ -1,36 +1,36 @@
 @model recipesAtYourFingertipsRev0.Models.Recipe
 
 @{
-    ViewData["Title"] = Model.Title;
-    ViewData["HideNavbar"] = true;
+ViewData["Title"] = Model.Title;
+ViewData["HideNavbar"] = true;
 }
 
-<div class="recipe-details" dir="rtl" style="text-align: right;">
+<div class="recipe-details" dir="rtl">
 
-    <h1>@Model.Title</h1>
+<h1>@Model.Title</h1>
 
-    <h3>חומרים</h3>
+<h3>חומרים</h3>
 
-    <div class="recipe-text">
-        @foreach (var line in Model.Ingredients.Split(
-            new[] { "\r\n", "\r", "\n" },
-            StringSplitOptions.None))
-        {
-            @line
-            <br />
-        }
-    </div>
+<div class="recipe-text">
+    @foreach (var line in Model.Ingredients.Split(
+        new[] { "\r\n", "\r", "\n" },
+        StringSplitOptions.None))
+    {
+        @line
+        <br />
+    }
+</div>
 
-    <h3>הוראות</h3>
+<h3>הוראות</h3>
 
-    <div class="recipe-text">
-        @foreach (var line in Model.Instructions.Split(
-            new[] { "\r\n", "\r", "\n" },
-            StringSplitOptions.None))
-        {
-            @line
-            <br />
-        }
-    </div>
+<div class="recipe-text">
+    @foreach (var line in Model.Instructions.Split(
+        new[] { "\r\n", "\r", "\n" },
+        StringSplitOptions.None))
+    {
+        @line
+        <br />
+    }
+</div>
 
 </div>

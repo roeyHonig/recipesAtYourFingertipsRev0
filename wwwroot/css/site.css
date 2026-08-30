@@ -270,3 +270,29 @@ body {
     margin-top: 0;
     margin-bottom: 20px;
 }
+
+.recipe-details {
+    background-color: black;
+    color: white;
+
+    min-height: 100vh;
+    padding: 30px;
+}
+
+.recipe-details h1,
+.recipe-details h3,
+.recipe-details .recipe-text {
+    color: white;
+}
+
+.recipe-details {
+    background-color: black;
+    color: white;
+
+    min-height: 100vh;
+
+    width: 100vw;
+
+    padding: 30px;
+    margin-left: calc(50% - 50vw);
+}
