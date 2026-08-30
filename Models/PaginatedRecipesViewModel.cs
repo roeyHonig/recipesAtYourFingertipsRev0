@@ -23,4 +23,6 @@ public class PaginatedRecipesViewModel
 
     public int LastItem =>
         Math.Min(CurrentPage * PageSize, TotalRecipes);
+
+    public string SearchTerm { get; set; } = string.Empty;
 }

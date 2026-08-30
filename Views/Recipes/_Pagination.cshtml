@@ -2,63 +2,67 @@
 
 @if (Model.TotalPages > 1)
 {
-    <div class="recipes-pagination" dir="ltr">
+<div class="recipes-pagination" dir="ltr">
 
-        @if (Model.CurrentPage > 1)
+    @if (Model.CurrentPage > 1)
+    {
+        <a asp-action="Index"
+           asp-route-page="@(Model.CurrentPage - 1)"
+           asp-route-pageSize="@Model.PageSize"
+           asp-route-searchTerm="@Model.SearchTerm"
+           class="pagination-button">
+            &lt; Previous
+        </a>
+    }
+
+    @{
+        var currentPage = Model.CurrentPage;
+        var totalPages = Model.TotalPages;
+
+        // Always show page 1.
+        var pagesToShow = new HashSet<int> { 1, totalPages };
+
+        // Show two pages before and two pages after the current page.
+        for (var page = currentPage - 2; page <= currentPage + 2; page++)
         {
-            <a asp-action="Index"
-               asp-route-page="@(Model.CurrentPage - 1)"
-               asp-route-pageSize="@Model.PageSize"
-               class="pagination-button">
-                &lt; Previous
-            </a>
-        }
-
-        @{
-            var currentPage = Model.CurrentPage;
-            var totalPages = Model.TotalPages;
-
-            // Always show page 1.
-            var pagesToShow = new HashSet<int> { 1, totalPages };
-
-            // Show two pages before and two pages after the current page.
-            for (var page = currentPage - 2; page <= currentPage + 2; page++)
+            if (page >= 1 && page <= totalPages)
             {
-                if (page >= 1 && page <= totalPages)
-                {
-                    pagesToShow.Add(page);
-                }
+                pagesToShow.Add(page);
             }
-
-            var orderedPages = pagesToShow.OrderBy(p => p).ToList();
         }
 
-        @for (var i = 0; i < orderedPages.Count; i++)
+        var orderedPages = pagesToShow.OrderBy(p => p).ToList();
+    }
+
+    @for (var i = 0; i < orderedPages.Count; i++)
+    {
+        var pageNumber = orderedPages[i];
+
+        if (i > 0 && pageNumber > orderedPages[i - 1] + 1)
         {
-            var pageNumber = orderedPages[i];
-
-            if (i > 0 && pageNumber > orderedPages[i - 1] + 1)
-            {
-                <span class="pagination-ellipsis">...</span>
-            }
-
-            <a asp-action="Index"
-               asp-route-page="@pageNumber"
-               asp-route-pageSize="@Model.PageSize"
-               class="pagination-button @(pageNumber == currentPage ? "active" : "")">
-                @pageNumber
-            </a>
+            <span class="pagination-ellipsis">...</span>
         }
 
-        @if (Model.CurrentPage < Model.TotalPages)
-        {
-            <a asp-action="Index"
-               asp-route-page="@(Model.CurrentPage + 1)"
-               asp-route-pageSize="@Model.PageSize"
-               class="pagination-button">
-                Next &gt;
-            </a>
-        }
+        <a asp-action="Index"
+           asp-route-page="@pageNumber"
+           asp-route-pageSize="@Model.PageSize"
+           asp-route-searchTerm="@Model.SearchTerm"
+           class="pagination-button @(pageNumber == currentPage ? "active" : "")">
+            @pageNumber
+        </a>
+    }
 
-    </div>
+    @if (Model.CurrentPage < Model.TotalPages)
+    {
+        <a asp-action="Index"
+           asp-route-page="@(Model.CurrentPage + 1)"
+           asp-route-pageSize="@Model.PageSize"
+           asp-route-searchTerm="@Model.SearchTerm"
+           class="pagination-button">
+            Next &gt;
+        </a>
+    }
+
+</div>
+
 }

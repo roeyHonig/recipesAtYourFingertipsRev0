@@ -1,3 +1,22 @@
+Add recipe search, pagination integration, and page-size selection
+
+* Add recipe search bar to the navigation bar
+* Support multiple comma-separated search terms
+* Require all search terms to match Title or Ingredients
+* Trim leading and trailing whitespace from search terms
+* Preserve search terms when navigating between pages
+* Preserve search terms when changing recipes per page
+* Allow selecting 10, 20, 30, 40, or 50 recipes per page
+* Make the search bar dynamically fill available navbar space
+
+
+
+
+
+
+
+
+
 feat: add secure recipe deletion
 
 - Add authenticated POST delete action
