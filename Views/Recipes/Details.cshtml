@@ -5,20 +5,32 @@
     ViewData["HideNavbar"] = true;
 }
 
-<div dir="rtl" style="text-align: right;">
+<div class="recipe-details" dir="rtl" style="text-align: right;">
 
     <h1>@Model.Title</h1>
 
     <h3>חומרים</h3>
 
     <div class="recipe-text">
-        @Model.Ingredients
+        @foreach (var line in Model.Ingredients.Split(
+            new[] { "\r\n", "\r", "\n" },
+            StringSplitOptions.None))
+        {
+            @line
+            <br />
+        }
     </div>
 
     <h3>הוראות</h3>
 
     <div class="recipe-text">
-        @Model.Instructions
+        @foreach (var line in Model.Instructions.Split(
+            new[] { "\r\n", "\r", "\n" },
+            StringSplitOptions.None))
+        {
+            @line
+            <br />
+        }
     </div>
 
 </div>
