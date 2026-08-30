@@ -134,8 +134,36 @@ app.Use(async (context, next) =>
 
     await next();
 });
-
 app.UseForwardedHeaders();
+app.Use(async (context, next) =>
+{
+    Console.WriteLine("========== FORWARDED HEADER DIAGNOSTIC ==========");
+
+    Console.WriteLine(
+        $"RemoteIpAddress: {context.Connection.RemoteIpAddress}");
+
+    Console.WriteLine(
+        $"X-Forwarded-For: {context.Request.Headers["X-Forwarded-For"]}");
+
+    Console.WriteLine(
+        $"X-Forwarded-Proto: {context.Request.Headers["X-Forwarded-Proto"]}");
+
+    Console.WriteLine(
+        $"X-Forwarded-Host: {context.Request.Headers["X-Forwarded-Host"]}");
+
+    Console.WriteLine(
+        $"DO-Connecting-IP: {context.Request.Headers["do-connecting-ip"]}");
+
+    Console.WriteLine(
+        $"Request Scheme: {context.Request.Scheme}");
+
+    Console.WriteLine(
+        $"Request Host: {context.Request.Host}");
+
+    Console.WriteLine("================================================");
+
+    await next();
+});
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
