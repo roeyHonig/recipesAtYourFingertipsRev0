@@ -1,3 +1,26 @@
+Improve recipe details page UI and responsive presentation
+
+- Redesign public recipe details page with a full-screen black background
+- Use white RTL text for recipe titles, ingredients, and instructions
+- Add responsive typography using viewport-based scaling
+- Preserve line breaks when rendering multi-line ingredients and instructions
+- Improve spacing between recipe section headings and content
+- Remove navbar and footer from the public recipe details page
+- Add full-screen page handling to the shared layout
+- Remove Bootstrap container and padding constraints from full-screen pages
+- Remove body bottom margin for full-screen recipe pages
+- Improve recipe details page readability across desktop and mobile screen sizes
+- Refine recipe page presentation for public/demo viewing
+
+
+
+
+
+
+
+
+
+
 Add recipe search, pagination integration, and page-size selection
 
 * Add recipe search bar to the navigation bar

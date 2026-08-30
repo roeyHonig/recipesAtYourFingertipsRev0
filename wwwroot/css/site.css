@@ -70,10 +70,6 @@ body {
     font-size: 18px;
 }
 
-.recipe-text {
-    white-space: pre-line;
-}
-
 .microsoft-login-button {
     display: inline-flex;
     align-items: center;
@@ -263,4 +259,54 @@ body {
     display: inline-block;
     padding: 7px 4px;
     color: #666;
+}
+
+.recipe-details h3 {
+    margin-top: 25px;
+    margin-bottom: 4px;
+}
+
+.recipe-details .recipe-text {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.recipe-details {
+    background-color: black;
+    color: white;
+
+    min-height: 100vh;
+    padding: 30px;
+}
+
+.recipe-details h1,
+.recipe-details h3,
+.recipe-details .recipe-text {
+    color: white;
+}
+
+.recipe-details {
+    background-color: black;
+    color: white;
+
+    min-height: 100vh;
+
+    width: 100vw;
+
+    padding: 30px;
+}
+
+.recipe-details h1 {
+    font-size: clamp(2rem, 6vw, 5rem);
+}
+
+.recipe-details h3 {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+}
+
+.recipe-details .recipe-text {
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
+}
+body.fullscreen-page {
+    margin-bottom: 0;
 }
