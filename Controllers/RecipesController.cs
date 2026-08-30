@@ -51,7 +51,7 @@ public class RecipesController : Controller
             if (searchTerms.Length > 0)
             {
                 query = query.Where(recipe =>
-                    searchTerms.Any(term =>
+                    searchTerms.All(term =>
                         recipe.Title.Contains(term) ||
                         recipe.Ingredients.Contains(term)));
             }
