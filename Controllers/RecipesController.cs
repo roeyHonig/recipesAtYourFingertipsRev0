@@ -17,7 +17,10 @@ public class RecipesController : Controller
         _db = db;
     }
 
-    public async Task<IActionResult> Index(int page = 1, int pageSize = 20)
+    public async Task<IActionResult> Index(
+    string? searchTerm,
+    int page = 1,
+    int pageSize = 20)
     {
         var appUser =
             CurrentUserService.GetCurrentUserFromRequest(HttpContext);
@@ -34,9 +37,27 @@ public class RecipesController : Controller
             pageSize = 20;
         }
 
-        var totalRecipes = await _db.Recipes
-            .Where(recipe => recipe.OwnerId == appUser.Id)
-            .CountAsync();
+        var query = _db.Recipes
+            .Where(recipe => recipe.OwnerId == appUser.Id);
+
+        if (!string.IsNullOrWhiteSpace(searchTerm))
+        {
+            var searchTerms = searchTerm
+                .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                .Select(term => term.Trim())
+                .Where(term => !string.IsNullOrEmpty(term))
+                .ToArray();
+
+            if (searchTerms.Length > 0)
+            {
+                query = query.Where(recipe =>
+                    searchTerms.Any(term =>
+                        recipe.Title.Contains(term) ||
+                        recipe.Ingredients.Contains(term)));
+            }
+        }
+
+        var totalRecipes = await query.CountAsync();
 
         var totalPages = (int)Math.Ceiling(
             totalRecipes / (double)pageSize);
@@ -54,20 +75,21 @@ public class RecipesController : Controller
             page = totalPages;
         }
 
-        var recipes = await _db.Recipes
-            .Where(recipe => recipe.OwnerId == appUser.Id)
+        var recipes = await query
             .OrderBy(recipe => recipe.Id)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
 
         var viewModel = new PaginatedRecipesViewModel
-            {
-                Recipes = recipes,
-                CurrentPage = page,
-                PageSize = pageSize,
-                TotalRecipes = totalRecipes
-            };
+        {
+            Recipes = recipes,
+            CurrentPage = page,
+            PageSize = pageSize,
+            TotalRecipes = totalRecipes,
+            SearchTerm = searchTerm ?? string.Empty
+        };
+
         ViewBag.AppUser = appUser;
 
         return View(viewModel);
