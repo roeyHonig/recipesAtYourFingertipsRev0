@@ -12,7 +12,7 @@ using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 // TODO roey: try to remove (or condition to development build) registering the ForwardedHeadersOptions, to see if it is not needed in production.
-builder.Services.Configure<ForwardedHeadersOptions>(options =>
+/*builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
     options.ForwardedHeaders =
         ForwardedHeaders.XForwardedFor |
@@ -21,7 +21,7 @@ builder.Services.Configure<ForwardedHeadersOptions>(options =>
 
     options.KnownNetworks.Clear();
     options.KnownProxies.Clear();
-});
+});*/
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -115,55 +115,9 @@ builder.Services
 var app = builder.Build();
 
 
-app.Use(async (context, next) =>
-{
-    Console.WriteLine("========== FORWARDED HEADER DIAGNOSTIC ==========");
-    Console.WriteLine(
-        $"RemoteIpAddress: {context.Connection.RemoteIpAddress}");
-    Console.WriteLine(
-        $"X-Forwarded-For: {context.Request.Headers["X-Forwarded-For"]}");
-    Console.WriteLine(
-        $"X-Forwarded-Proto: {context.Request.Headers["X-Forwarded-Proto"]}");
-    Console.WriteLine(
-        $"X-Forwarded-Host: {context.Request.Headers["X-Forwarded-Host"]}");
-    Console.WriteLine(
-        $"Request Scheme: {context.Request.Scheme}");
-    Console.WriteLine(
-        $"Request Host: {context.Request.Host}");
-    Console.WriteLine("================================================");
 
-    await next();
-});
-app.UseForwardedHeaders();
-app.Use(async (context, next) =>
-{
-    Console.WriteLine("========== FORWARDED HEADER DIAGNOSTIC ==========");
+//app.UseForwardedHeaders();
 
-    Console.WriteLine(
-        $"RemoteIpAddress: {context.Connection.RemoteIpAddress}");
-
-    Console.WriteLine(
-        $"X-Forwarded-For: {context.Request.Headers["X-Forwarded-For"]}");
-
-    Console.WriteLine(
-        $"X-Forwarded-Proto: {context.Request.Headers["X-Forwarded-Proto"]}");
-
-    Console.WriteLine(
-        $"X-Forwarded-Host: {context.Request.Headers["X-Forwarded-Host"]}");
-
-    Console.WriteLine(
-        $"DO-Connecting-IP: {context.Request.Headers["do-connecting-ip"]}");
-
-    Console.WriteLine(
-        $"Request Scheme: {context.Request.Scheme}");
-
-    Console.WriteLine(
-        $"Request Host: {context.Request.Host}");
-
-    Console.WriteLine("================================================");
-
-    await next();
-});
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -171,6 +125,14 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+    // DigitalOcean terminates HTTPS at the reverse proxy.
+    // The application container receives HTTP internally,
+    // but the public application is HTTPS-only.
+    app.Use((context, next) =>
+    {
+        context.Request.Scheme = "https";
+        return next();
+    });
 }
 
 app.UseHttpsRedirection();
