@@ -1,3 +1,6 @@
+Use forward headers only in development so Auth0 providers don't consider the original request coming from the github codespace forward url
+---------------------------------------
+---------------------------------------
 Improve recipe details page UI and responsive presentation
 
 - Redesign public recipe details page with a full-screen black background
@@ -11,16 +14,8 @@ Improve recipe details page UI and responsive presentation
 - Remove body bottom margin for full-screen recipe pages
 - Improve recipe details page readability across desktop and mobile screen sizes
 - Refine recipe page presentation for public/demo viewing
-
-
-
-
-
-
-
-
-
-
+---------------------------------------
+---------------------------------------
 Add recipe search, pagination integration, and page-size selection
 
 * Add recipe search bar to the navigation bar
@@ -31,15 +26,8 @@ Add recipe search, pagination integration, and page-size selection
 * Preserve search terms when changing recipes per page
 * Allow selecting 10, 20, 30, 40, or 50 recipes per page
 * Make the search bar dynamically fill available navbar space
-
-
-
-
-
-
-
-
-
+---------------------------------------
+---------------------------------------
 feat: add secure recipe deletion
 
 - Add authenticated POST delete action
@@ -47,16 +35,8 @@ feat: add secure recipe deletion
 - Add anti-forgery protection
 - Add delete button to recipe list
 - Add user confirmation before deletion
-
-
-
-
-
-
-
-
-
-
+---------------------------------------
+---------------------------------------
 feat: add configurable recipe pagination
 
 - Add pagination with configurable page size
@@ -64,14 +44,8 @@ feat: add configurable recipe pagination
 - Add smart page navigation with ellipses
 - Preserve page size across pagination links
 - Add pagination controls above and below recipe results
-
-
-
-
-
-
-
-
+---------------------------------------
+---------------------------------------
 Add recipe editing functionality and improve recipe list UI
 
 * Add styled recipe buttons to the My Recipes page
@@ -86,12 +60,8 @@ Add recipe editing functionality and improve recipe list UI
 * Style Microsoft sign-in button to match the Google sign-in experience
 * Update Microsoft sign-in text to "Continue with Microsoft"
 * Add a simple Windows-style Microsoft icon
-
-
-
-
-
-
+---------------------------------------
+---------------------------------------
 Add Microsoft OAuth authentication support
 
 - Add Microsoft account OAuth provider alongside Google authentication
@@ -102,13 +72,8 @@ Add Microsoft OAuth authentication support
 - Store correct provider information in ExternalLogin records
 - Preserve existing internal User identity model across providers
 - Verify Google and Microsoft users are created and resolved correctly
-
-
-
-
-
-
-
+---------------------------------------
+---------------------------------------
 Add public recipe details pages
 
 - Make recipes in My Recipes clickable
@@ -120,12 +85,8 @@ Add public recipe details pages
 - Add RTL layout and Hebrew labels to recipe details
 - Hide the authenticated navbar on public recipe details pages
 - Keep recipe ownership enforced for the private My Recipes list
-
-
-
-
-
-
+---------------------------------------
+---------------------------------------
 feat: navbar
 Refine authentication-based navigation and home page flow
 
@@ -137,15 +98,8 @@ Refine authentication-based navigation and home page flow
 - Simplify the Home view by removing authenticated-user UI
 - Preserve the existing Google sign-in flow
 - Ensure Google is no longer the default authentication challenge scheme
-
-
-
-
-
-
-
-
-
+---------------------------------------
+---------------------------------------
 feat: recipes
 Google login/logout working.
 Google is no longer the default challenge scheme.
@@ -155,17 +109,8 @@ Request-scoped current user.
 Per-user recipe querying.
 Recipe creation with server-controlled OwnerId and timestamps.
 RTL cosmetics for the recipe UI.
-
-
-
-
-
-
-
-
-
-
-
+---------------------------------------
+---------------------------------------
 feat: application user integration
 - Add CurrentUserService to find or create application users
 - Add CurrentUserMiddleware to synchronize authenticated identities
@@ -177,19 +122,12 @@ feat: application user integration
 - Log application user creation and assigned internal User ID
 - Verify Google authentication works in both development and production
 - Verify repeated authenticated requests do not create duplicate users
-
-
-
-
-
-
+---------------------------------------
+---------------------------------------
 - Persist ASP.NET Core Data Protection keys in PostgreSQL
 - Add DataProtectionKeys EF migration
-
-
-
-
-
+---------------------------------------
+---------------------------------------
 Implemented Google OAuth authentication using ASP.NET Core's cookie-based authentication. Added Google login and logout flows, configured development and production OAuth redirect URIs, and integrated authentication state into the Home page with conditional login/logout UI.
 Added environment-aware reverse-proxy handling to correctly detect the original HTTPS scheme and public host when running behind the GitHub Codespaces proxy, while retaining the groundwork for production proxy configuration.
 - Add Google OAuth authentication with cookie-based sign-in
@@ -197,11 +135,8 @@ Added environment-aware reverse-proxy handling to correctly detect the original 
 - Add Google sign-in/sign-out UI to the Home page
 - Configure development and production OAuth redirect handling
 - Add forwarded-header support for Codespaces/proxy environments
-
-
-
-
-
+---------------------------------------
+---------------------------------------
 ### Added PostgreSQL database integration with EF Core
 - Added Entity Framework Core with PostgreSQL (Npgsql) support.
 - Added `ApplicationDbContext` and configured it for PostgreSQL.

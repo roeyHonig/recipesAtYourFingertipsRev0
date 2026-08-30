@@ -113,8 +113,11 @@ builder.Services
 
 
 var app = builder.Build();
-// TODO roey: try to remove (or condition to development build) the ForwardedHeaders Middleware, to see if it is not needed in production.
-app.UseForwardedHeaders();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseForwardedHeaders();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
