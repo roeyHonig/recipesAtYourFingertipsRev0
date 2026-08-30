@@ -114,10 +114,28 @@ builder.Services
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+
+app.Use(async (context, next) =>
 {
-    app.UseForwardedHeaders();
-}
+    Console.WriteLine("========== FORWARDED HEADER DIAGNOSTIC ==========");
+    Console.WriteLine(
+        $"RemoteIpAddress: {context.Connection.RemoteIpAddress}");
+    Console.WriteLine(
+        $"X-Forwarded-For: {context.Request.Headers["X-Forwarded-For"]}");
+    Console.WriteLine(
+        $"X-Forwarded-Proto: {context.Request.Headers["X-Forwarded-Proto"]}");
+    Console.WriteLine(
+        $"X-Forwarded-Host: {context.Request.Headers["X-Forwarded-Host"]}");
+    Console.WriteLine(
+        $"Request Scheme: {context.Request.Scheme}");
+    Console.WriteLine(
+        $"Request Host: {context.Request.Host}");
+    Console.WriteLine("================================================");
+
+    await next();
+});
+
+app.UseForwardedHeaders();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
