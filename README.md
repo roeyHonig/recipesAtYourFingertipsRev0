@@ -1,25 +1,161 @@
-# recipesAtYourFingertipsRev0
-This is the Rev 0 of the final project for openU
-Remeber, if working on a new codespace, it is very well posiablle that we need to add again locally the user secrets (which contain the DB connection creditials, google cloud auth0 creditials)
+# Recipes At Your Fingertips – Rev 0
 
-You need to excute this commands from the main directory of the project:
+## Overview
 
-dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Host=ep-royal-dawn-b2k5kx9x.c-6.eu-central-1.aws.neon.tech;Database=neondb;Username=neondb_owner;Password=<the password for your neon postgerSQL DB, you have kept it on your computer and can also rotate it from neon web console where you have logged using your github account>;SSL Mode=Require"
+**Recipes At Your Fingertips** is a web-based recipe management system built with ASP.NET Core MVC and PostgreSQL.
 
-dotnet user-secrets set "Authentication:Google:ClientId" "YOUR_CLIENT_ID"
+Registered users can manage their personal recipe collections, including:
 
-dotnet user-secrets set "Authentication:Google:ClientSecret" "YOUR_CLIENT_SECRET"
+- Creating recipes
+- Searching their own recipes
+- Editing recipes
+- Deleting recipes
+- Viewing individual recipes
 
-dotnet user-secrets set "Authentication:Microsoft:ClientId" "YOUR_CLIENT_ID"
+Individual recipe pages are public and read-only, allowing a recipe to be shared through its URL.
 
-dotnet user-secrets set "Authentication:Microsoft:ClientSecret" "YOUR_CLIENT_SECRET_value"
+## Production
 
-you can print to terminal all the current secrets to verify by running
-dotnet user-secrets list
+The production application is hosted on DigitalOcean App Platform:
 
+https://octopus-app-ijx44.ondigitalocean.app/
 
-this app uses the following service providers:
-digitalOcean - a platform to deploy our app to a public domain. login via github, payment method was set to be apple pay.
-Neon - provides our postgerSQL DB - login via github
-Google cloud console - for auth0 - login via your google account, credit card was set as the payment method
-Microsoft entra admin center - for auth0 - login via the microsoft personal account and also azure account using email: spill.48thane@icloud.com. credit card was set as a payment method.
+## Requirements
+
+To run the project locally, the developer needs:
+
+- .NET 10 SDK
+- Access to the PostgreSQL database
+- The required local User Secrets
+
+The project uses Entity Framework Core for database access and migrations.
+
+## Local Configuration
+
+The following secrets are required for running the application locally:
+
+```text
+ConnectionStrings:DefaultConnection
+
+Authentication:Google:ClientId
+Authentication:Google:ClientSecret
+
+Authentication:Microsoft:ClientId
+Authentication:Microsoft:ClientSecret
+```
+
+The required secret values are managed by **Roey Honig**, the repository owner and project administrator.
+
+Do not commit secrets or other sensitive configuration values to the repository.
+
+## Local Authentication Configuration
+
+When running the application locally, the developer must make sure that the local authentication callback URLs are registered for both external identity providers.
+
+The required redirect URI depends on the local URL and HTTPS port used by the application.
+
+For example, if the application is running locally at:
+
+```text
+https://localhost:7003
+```
+
+the Google redirect URI should be:
+
+```text
+https://localhost:7003/signin-google
+```
+
+and the Microsoft redirect URI should be:
+
+```text
+https://localhost:7003/signin-microsoft
+```
+
+The redirect URIs must be configured in both external identity provider applications:
+
+- **Google Cloud Console** – OAuth client configuration.
+- **Microsoft Entra admin center** – application registration and authentication configuration.
+
+The local port may be different on another developer's machine. The developer should therefore use the actual HTTPS URL and port configured for their local application.
+
+If the required local redirect URI is not already registered, contact **Roey Honig**, the project administrator, to have the URI added to the appropriate Google and Microsoft application configurations.
+
+> **Important:** The redirect URI must match the URL used by the application exactly, including the protocol (`http` or `https`), hostname, port, and callback path.
+
+## Running Locally
+
+Restore the project dependencies:
+
+```bash
+dotnet restore
+```
+
+Build the project:
+
+```bash
+dotnet build
+```
+
+Run the application:
+
+```bash
+dotnet run
+```
+
+The application will display the local URLs on which it is running.
+
+## Database
+
+After configuring the PostgreSQL connection string, apply the Entity Framework Core migrations:
+
+```bash
+dotnet ef database update
+```
+
+This creates or updates the required database structure.
+
+## Production Deployment
+
+The production application is hosted using **DigitalOcean App Platform**.
+
+Production configuration contains the required database connection string and authentication configuration through environment variables.
+
+Local User Secrets are used only for local development.
+
+The production environment must contain the equivalent configuration for:
+
+```text
+ConnectionStrings:DefaultConnection
+
+Authentication:Google:ClientId
+Authentication:Google:ClientSecret
+
+Authentication:Microsoft:ClientId
+Authentication:Microsoft:ClientSecret
+```
+
+The production authentication redirect URIs are configured separately from the local development redirect URIs.
+
+## External Services
+
+The project uses the following external services:
+
+- **DigitalOcean App Platform** – production hosting
+- **Neon PostgreSQL** – PostgreSQL database hosting
+- **Google Cloud Console** – Google authentication configuration
+- **Microsoft Entra** – Microsoft authentication configuration
+
+Access to the relevant project configurations and credentials is managed by **Roey Honig**.
+
+## Security
+
+Do not commit any of the following to the repository:
+
+- Client secrets
+- Database connection strings
+- Passwords
+- API keys
+- Other sensitive configuration values
+
+Use .NET User Secrets for local development and the appropriate environment configuration for production.

@@ -310,3 +310,106 @@ body {
 body.fullscreen-page {
     margin-bottom: 0;
 }
+
+/* Privacy page */
+
+.privacy-page {
+    min-height: 70vh;
+    width: 100%;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px;
+    box-sizing: border-box;
+
+    background-color: #ffffff;
+    color: #1f1f1f;
+
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+
+    text-align: right;
+}
+
+.privacy-header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.privacy-header h1 {
+    margin-bottom: 10px;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.privacy-header p {
+    margin: 0;
+    color: #666666;
+    font-size: 1rem;
+}
+
+.privacy-section {
+    margin-bottom: 25px;
+}
+
+.privacy-section h2 {
+    margin-bottom: 10px;
+    font-size: 1.35rem;
+    font-weight: 600;
+}
+
+.privacy-section p {
+    margin-bottom: 10px;
+    line-height: 1.7;
+}
+
+.privacy-section ul {
+    margin-bottom: 0;
+    padding-right: 25px;
+    line-height: 1.8;
+}
+
+.privacy-highlight {
+    margin: 20px 0;
+    padding: 15px 18px;
+
+    background-color: #f8f9fa;
+
+    border-right: 4px solid #007bff;
+    border-radius: 4px;
+}
+
+.privacy-note {
+    margin-top: 30px;
+    padding: 15px 18px;
+
+    background-color: #fff8e1;
+
+    border: 1px solid #ffe082;
+    border-radius: 6px;
+
+    line-height: 1.7;
+}
+
+.privacy-contact {
+    margin-top: 30px;
+    padding-top: 20px;
+
+    border-top: 1px solid #e0e0e0;
+
+    text-align: center;
+    color: #666666;
+}
+
+.home-cooking-art {
+    margin: 25px 0;
+    margin-top: 0;
+    text-align: center;
+}
+
+.home-cooking-art img {
+    width: 220px;
+    max-width: 100%;
+    height: auto;
+}

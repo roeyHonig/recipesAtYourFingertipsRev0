@@ -1,3 +1,6 @@
+Improve home and privacy page appearance
+---------------------------------------
+---------------------------------------
 fix: handle HTTPS correctly behind DigitalOcean reverse proxy
 
 * Use forwarded headers only in the development environment
