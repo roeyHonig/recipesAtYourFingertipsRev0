@@ -401,3 +401,15 @@ body.fullscreen-page {
     text-align: center;
     color: #666666;
 }
+
+.home-cooking-art {
+    margin: 25px 0;
+    margin-top: 0;
+    text-align: center;
+}
+
+.home-cooking-art img {
+    width: 220px;
+    max-width: 100%;
+    height: auto;
+}
